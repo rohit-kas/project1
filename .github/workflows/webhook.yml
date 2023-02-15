@@ -1,0 +1,15 @@
+name: Webhook
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  webhook:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Trigger webhook
+      run: |
+        curl -X POST -H 'Content-type: application/json' --data '{"text":"A new commit has been pushed to the master branch!"}'  https://edc5-2405-201-3025-5b5d-e901-c7b3-aa1-dbea.in.ngrok.io/process
