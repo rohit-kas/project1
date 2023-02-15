@@ -3,7 +3,7 @@ name: Trigger Webhook on Commit
 on:
   push:
     branches:
-      - "master"
+      - "*"
 
 jobs:
   trigger_webhook:
@@ -15,4 +15,7 @@ jobs:
           echo "::set-output name=files::$(git diff-tree --no-commit-id --name-only -r ${{ github.sha }} | xargs)"
       - name: echo output
         run: |
-          echo ${{ steps.getfile.outputs.f
+          echo ${{ steps.getfile.outputs.files }}
+      - name: Trigger Webhook
+        run: |
+          curl -X POST -H "Content-Type: application/json" -d '{"file_name": "'"${{ steps.commit_info.outputs.file_name }}"'"}' "https://3941-2405-201-3025-5b5d-5866-cc0b-f38f-a776.in.ngrok.io/process"
