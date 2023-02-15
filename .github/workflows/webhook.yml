@@ -12,4 +12,4 @@ jobs:
     steps:
     - name: Trigger webhook
       run: |
-        curl -X POST -H 'Content-type: application/json' --data '{"text":"A new commit has been pushed to the master branch!"}'  https://edc5-2405-201-3025-5b5d-e901-c7b3-aa1-dbea.in.ngrok.io/process
+        curl -X POST -H 'Content-type: application/json' --data '{"text":"A new commit has been pushed to the master branch!"}'  https://3941-2405-201-3025-5b5d-5866-cc0b-f38f-a776.in.ngrok.io/process
