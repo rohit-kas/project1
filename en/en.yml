@@ -3,7 +3,7 @@ English:
   boolean_key: true
   empty_string_translation: ''
   key_with_line-break: |-
-    This translations contains
+    This translations contains abcd
     a line-break.
   nested:
     deeply:
