@@ -3,7 +3,7 @@ name: Trigger Webhook on Commit
 on:
   push:
     branches:
-      - "*"
+      - "master"
 
 jobs:
   trigger_webhook:
