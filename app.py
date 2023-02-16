@@ -7,8 +7,8 @@ INITIALIZE = True
 
 app = Flask(__name__)
 
-@app.route('/output', methods=['GET','POST'])
-def output():
+@app.route('/update', methods=['GET','POST'])
+def update():
     global INITIALIZE
     if INITIALIZE :
         print("initialize begin for phrase TMS ")
