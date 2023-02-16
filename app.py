@@ -10,8 +10,6 @@ app = Flask(__name__)
 @app.route('/update', methods=['GET','POST'])
 def update():
     global INITIALIZE
-     output = request.get_json()
-    print("github response",output)
     if INITIALIZE :
         print("initialize begin for phrase TMS ")
         get_github_file() #1
