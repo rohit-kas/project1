@@ -18,8 +18,7 @@ jobs:
           echo "::set-output name=file::$(git diff-tree --no-commit-id --name-only -r ${{ github.sha }} | xargs)"
       - name: echo output
         run: |
-          echo ${{ steps.getfile.file}}
-          shell: bash
+          echo ${{steps.getfile.file}}
       - name: Trigger Webhook
         run: |
-          curl -X POST -H "Content-Type: application/json" -d '{"file": "'"${{ steps.commit_info.output.file_name }}"'"}' "https://95df-2405-201-3025-5b5d-48c9-d1fb-d1f0-d396.in.ngrok.io/update"
+          curl -X POST -H "Content-Type: application/json" -d '{"file": "'"${{ steps.output.file }}"'"}' "https://95df-2405-201-3025-5b5d-48c9-d1fb-d1f0-d396.in.ngrok.io/update"
