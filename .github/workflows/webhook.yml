@@ -15,8 +15,9 @@ jobs:
         id: get_files
         run: |
           echo "::set-output name=files::$(git diff-tree --no-commit-id --name-only -r ${{ github.sha }} | xargs)"
-      - name: echo output
+      - name: file name sent
         if: ${{ steps.get_files.outputs.files != '' }}
       - name: Trigger Webhook
         run: |
           curl -X POST -H "Content-Type: application/json" -d '{"file_name": "'"${{ steps.get_file.output.files}}"'"}' "https://7750-2405-201-3025-5b5d-fcc2-9b53-e981-b824.in.ngrok.io/update"
+          fi
