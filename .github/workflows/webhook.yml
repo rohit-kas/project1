@@ -16,6 +16,7 @@ jobs:
         run: |
           echo "::set-output name=files::$(git diff-tree --no-commit-id --name-only -r ${{ github.sha }} | xargs)"
       - name: echo output
+        if: ${{ steps.get_files.outputs.files != '' }}
         run: |
           echo ${{ steps.get_file.outputs.files }}
       - name: Trigger Webhook
