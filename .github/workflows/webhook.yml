@@ -20,4 +20,4 @@ jobs:
           echo ${{ steps.get_file.output.files != '' }}
       - name: Trigger Webhook
         run: |
-          curl -X POST -H "Content-Type: application/json" \ -d '{"file_name": "'"${{ steps.get_files.output.file_name }}"'"}' \ "https://262b-2405-201-3025-5b5d-7d21-47f1-4089-cf6a.in.ngrok.io/update"
+          curl -X POST -H "Content-Type: application/json"  -d '{"file_name": "'"${{ steps.get_files.output.file_name }}"'"}' "https://262b-2405-201-3025-5b5d-7d21-47f1-4089-cf6a.in.ngrok.io/update"
