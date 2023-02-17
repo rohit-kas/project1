@@ -18,4 +18,4 @@ jobs:
       - name: Send webhook request
         if: ${{ steps.get_files.outputs.files != '' }}
         run: |
-          curl -X POST -H "Content-Type: application/json" \ -d '{"file_name": "'"${{ steps.get_files.outputs.files }}"'"}' \ "https://9fff-2405-201-3025-5b5d-7d21-47f1-4089-cf6a.in.ngrok.io"
+          curl -X POST -H "Content-Type: application/json" \ -d '{"file_name": "'"${{ steps.get_files.outputs.files }}"'"}' \ "https://7750-2405-201-3025-5b5d-fcc2-9b53-e981-b824.in.ngrok.io/update"
