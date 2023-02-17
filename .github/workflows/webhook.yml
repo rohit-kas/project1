@@ -1,24 +1,25 @@
-name: Trigger Webhook on Commit
+name: first testing
 
 on:
+  pull_request:
   push:
     branches:
-      - "*"
+      - master
 
 jobs:
-  trigger_webhook:
+  test:
     runs-on: ubuntu-latest
     steps:
       - name: checkout
-        uses: actions/checkout@v3
-      
-      - name: get changed files
-        id: getfile
-        run: |
-          echo "::set-output name=file::$(git diff-tree --no-commit-id --name-only -r ${{ github.sha }} | xargs)"
-      - name: echo output
-        run: |
-          echo ${{steps.getfile.file}}
-      - name: Trigger Webhook
-        run: |
-          curl -X POST -H "Content-Type: application/json" -d '{"file": "'"${{ steps.getfile.file }}"'"}' "https://95df-2405-201-3025-5b5d-48c9-d1fb-d1f0-d396.in.ngrok.io/update"
+        uses: actions/checkout@v1
+        
+      - name: use node.js ${{ matrix.node-version }}
+        uses: actions/node@v1
+        with:
+         node-version: ${{ matrix.node-version }}
+      - name: install
+        run: npm install
+      - name: test
+        run: npm test 
+         
+         
