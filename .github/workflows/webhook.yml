@@ -9,13 +9,16 @@ jobs:
   trigger_webhook:
     runs-on: ubuntu-latest
     steps:
+      - name: checkout
+      - uses: action/checkout@v2
+      
       - name: get changed files
         id: getfile
         run: |
-          echo "::set-output name=files::$(git diff-tree --no-commit-id --name-only -r ${{ github.sha }} | xargs)"
+          echo "::set-output name=files_name::$(git diff-tree --no-commit-id --name-only -r ${{ github.sha }} )"
       - name: echo output
         run: |
-          echo ${{ steps.getfile.output.files }}
+          echo ${{ steps.getfile.output.files_name}}
       - name: Trigger Webhook
         run: |
-          curl -X POST -H "Content-Type: application/json" -d '{"file_name": "'"${{ steps.commit_info.output.file_name }}"'"}' "https://e10b-2405-201-3025-5b5d-14db-6d72-a1b1-9d28.in.ngrok.io/update"
+          curl -X POST -H "Content-Type: application/json" --data'{"files_name": "${{ steps.commit_info.output.file_name }}"}' "https://95df-2405-201-3025-5b5d-48c9-d1fb-d1f0-d396.in.ngrok.io/update"
