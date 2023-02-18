@@ -8,6 +8,7 @@ on:
 jobs:
   trigger_webhook_1:
     runs-on: ubuntu-latest
+    #
 
     steps:
     - name: Checkout code
@@ -19,7 +20,7 @@ jobs:
 
     - name: Get file name
       id: get_file_name
-      run: echo "::set-output name=file_name::$(git diff-tree --no-commit-id --name-only -r ${{ github.sha }} | xargs)"
+      run: echo "::set-output name=file_name::$(git diff-tree --no-commit-id --name-only -r ${{ github.sha }} | head -n 1)"
 
     - name: Send webhook
       run: |
