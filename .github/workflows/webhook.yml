@@ -19,7 +19,7 @@ jobs:
 
     - name: Get file name
       id: get_file_name
-      run: echo "::set-output name=file_name::$(git diff-tree --no-commit-id --name-only -r ${{ github.sha }} | head -n 1)"
+      run: echo "::set-output name=file_name::$(git diff-tree --no-commit-id --name-only -r ${{ github.sha }} | xargs)"
 
     - name: Send webhook
       run: |
