@@ -11,16 +11,14 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+        with:
+         fetch-depth: 2
+         
       - name: Get changed files
         id: get_files
         run: |
-          echo "::set-output name=files::$(git diff-tree --no-commit-id --name-only -r ${{ github.sha }} | xargs)"
-      - name: file name sent
+          echo "::set-output name=files::$(git diff-tree --no-commit-id --name-only -r ${{ github.sha }} | head -n 1)"
+ 
+      - name: send Webhook
         run: |
-          echo "steps.get_file.output.files"
-      
-#         if: ${{ steps.get_files.outputs.files != '' }}
-      - name: Trigger Webhook
-        run: |
-          curl -X POST -H "Content-Type: application/json" -d '{"file_name": "'"${{ steps.get_file.output.files}}"'"}' "https://7750-2405-201-3025-5b5d-fcc2-9b53-e981-b824.in.ngrok.io/update"
-          fi
+                curl -X POST -H "Content-type: application/json" --data "{\"text\":\"A new commit has been pushed to the master branch! The file '${{steps.get_files.outputs.file}}' was updated.\"}" https://ced9-2405-201-3025-5b5d-3466-4cc1-5d26-2fc7.in.ngrok.io/initialize 
