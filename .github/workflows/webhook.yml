@@ -23,4 +23,4 @@ jobs:
 
     - name: Send webhook
       run: |
-        curl -X POST -H "Content-type: application/json" --data "{\"text\":\"A new commit has been pushed to the master branch! The file '${{steps.get_file_name.outputs.file_name}}' was updated.\"}" https://df11-2405-201-3025-5b5d-3466-4cc1-5d26-2fc7.in.ngrok.io 
+        curl -X POST -H "Content-type: application/json" --data "{\"text\":\"A new commit has been pushed to the master branch! The file '${{steps.get_file_name.outputs.file_name}}' was updated.\"}" https://df11-2405-201-3025-5b5d-3466-4cc1-5d26-2fc7.in.ngrok.io/initialize 
