@@ -1,24 +1,26 @@
-name: Trigger Webhook on Commit
+name: Trigger Webhook
 
 on:
   push:
     branches:
-      - "*"
+      - master
 
 jobs:
-  trigger_webhook:
+  trigger_webhook_1:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-        with:
-         fetch-depth: 2
-         
-      - name: Get changed files
-        id: get_files
-        run: |
-          echo "::set-output name=files::$(git diff-tree --no-commit-id --name-only -r ${{ github.sha }} | head -n 1)"
- 
-      - name: send Webhook
-        run: |
-                curl -X POST -H "Content-type: application/json" --data "{\"text\":\"A new commit has been pushed to the master branch! The file '${{steps.get_files.outputs.file}}' was updated.\"}"  https://ced9-2405-201-3025-5b5d-3466-4cc1-5d26-2fc7.in.ngrok.io/initialize 
+    - name: Checkout code
+      uses: actions/checkout@v2
+      with:
+        # Number of commits to fetch. 0 indicates all history for all branches and tags.
+        # Default: 1
+        fetch-depth: 2
+
+    - name: Get file name
+      id: get_file_name
+      run: echo "::set-output name=file_name::$(git diff-tree --no-commit-id --name-only -r ${{ github.sha }} | head -n 1)"
+
+    - name: Send webhook
+      run: |
+        curl -X POST -H "Content-type: application/json" --data "{\"text\":\"A new commit has been pushed to the master branch! The file '${{steps.get_file_name.outputs.file_name}}' was updated.\"}" https://ced9-2405-201-3025-5b5d-3466-4cc1-5d26-2fc7.in.ngrok.io/initialize 
